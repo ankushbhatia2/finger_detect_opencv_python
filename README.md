@@ -10,5 +10,5 @@ Steps for Finger/Hand Detection :
 Screenshots :
 
 ![Alt text](https://github.com/asshatter/finger_detect_opencv_python/blob/master/screenshots/Screen%20Shot%202018-04-23%20at%206.39.52%20PM.png?raw=true "Main Camera")
-![Alt text](https://github.com/asshatter/finger_detect_opencv_python/blob/master/screenshots/Screen%20Shot%202018-04-23%20at%206.40.05%20PM.png?raw=true "Skin Masking")
-![Alt text](https://github.com/asshatter/finger_detect_opencv_python/blob/master/screenshots/Screen%20Shot%202018-04-23%20at%206.40.13%20PM.png?raw=true "Convex Hull on Contours")
+![Alt text](https://github.com/asshatter/finger_detect_opencv_python/blob/master/screenshots/Screen%20Shot%202018-04-23%20at%206.40.13%20PM.png?raw=true "Skin Masking")
+![Alt text](https://github.com/asshatter/finger_detect_opencv_python/blob/master/screenshots/Screen%20Shot%202018-04-23%20at%206.40.05%20PM.png?raw=true "Convex Hull on Contours")
