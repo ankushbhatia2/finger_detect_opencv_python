@@ -13,11 +13,8 @@ import math
 # github link : https://github.com/asshatter
 # website : https://asshatter.github.io
 
-# parameters
-cap_region_x_begin = 0.5  # start point/total width
-cap_region_y_end = 0.8  # start point/total width
 
-def calculateFingers(res, drawing):  # -> finished bool, cnt: finger count
+def calculateFingers(res, drawing):
     #  convexity defect
     hull = cv2.convexHull(res, returnPoints=False)
     if len(hull) > 3:
@@ -52,15 +49,12 @@ while camera.isOpened():
     ret, frame = camera.read()
     frame = cv2.bilateralFilter(frame, 5, 50, 100)  # Smoothing
     frame = cv2.flip(frame, 1)  #Horizontal Flip
-    cv2.rectangle(frame, (int(cap_region_x_begin * frame.shape[1]), 0),
-                  (frame.shape[1], int(cap_region_y_end * frame.shape[0])), (255, 0, 0), 2)
     cv2.imshow('original', frame)
 
 
     #Background Removal
     bgModel = cv2.createBackgroundSubtractorMOG2(0, 50)
-    fgmask = bgModel.apply(frame[0:int(cap_region_y_end * frame.shape[0]),
-          int(cap_region_x_begin * frame.shape[1]):frame.shape[1]])
+    fgmask = bgModel.apply(frame)
 
     kernel = np.ones((3, 3), np.uint8)
     fgmask = cv2.erode(fgmask, kernel, iterations=1)
