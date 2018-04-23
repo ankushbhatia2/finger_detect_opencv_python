@@ -17,7 +17,6 @@ import math
 cap_region_x_begin = 0.5  # start point/total width
 cap_region_y_end = 0.8  # start point/total width
 
-
 def calculateFingers(res, drawing):  # -> finished bool, cnt: finger count
     #  convexity defect
     hull = cv2.convexHull(res, returnPoints=False)
@@ -58,11 +57,16 @@ while camera.isOpened():
     cv2.imshow('original', frame)
 
 
-    #Thresholding captured part
-    img = frame[0:int(cap_region_y_end * frame.shape[0]),
-          int(cap_region_x_begin * frame.shape[1]):frame.shape[1]]  # capturing the image in box
+    #Background Removal
+    bgModel = cv2.createBackgroundSubtractorMOG2(0, 50)
+    fgmask = bgModel.apply(frame[0:int(cap_region_y_end * frame.shape[0]),
+          int(cap_region_x_begin * frame.shape[1]):frame.shape[1]])
 
-    # convert the image into binary image
+    kernel = np.ones((3, 3), np.uint8)
+    fgmask = cv2.erode(fgmask, kernel, iterations=1)
+    img = cv2.bitwise_and(frame, frame, mask=fgmask)
+
+    # Skin detect and thresholding
     hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
     lower = np.array([0, 48, 80], dtype="uint8")
     upper = np.array([20, 255, 255], dtype="uint8")
